@@ -1,0 +1,273 @@
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#07111f">
+<meta name="description" content="دیدبان پول؛ داشبورد پایش بازار سرمایه و نمادهای بورس">
+<title>دیدبان پول | پایش بازار سرمایه</title>
+<style>
+:root{--bg:#050b14;--panel:#0c1726;--panel2:#101f32;--line:#203249;--text:#eaf2fc;--muted:#8fa4bd;--blue:#39a8ff;--green:#19d6a0;--red:#ff6178;--gold:#ffc96b}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(ellipse at top,#10243a 0,#050b14 58%);color:var(--text);font-family:Tahoma,Arial,sans-serif;min-height:100vh}
+header{padding:24px 18px 18px;border-bottom:1px solid var(--line);background:#07111fe8}
+.wrap{max-width:1450px;margin:auto;padding:0 16px}
+.top{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:12px}
+.logo{width:48px;height:48px;display:grid;place-items:center;border-radius:15px;background:linear-gradient(135deg,#167bca,#172e52);font-size:25px;box-shadow:0 0 28px #168bce35}
+h1{font-size:25px;margin:0 0 6px}
+.sub{color:var(--muted);font-size:12px}
+.pill{border:1px solid var(--line);border-radius:30px;padding:9px 13px;font-size:12px;color:var(--muted);display:flex;align-items:center;gap:8px}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--gold);display:inline-block}
+main{padding:22px 0 40px}
+.hero{border:1px solid #214264;border-radius:18px;padding:20px;background:linear-gradient(110deg,#102844,#0b1727 70%);margin-bottom:18px}
+.hero h2{font-size:20px;margin:0 0 9px}
+.hero p{font-size:13px;line-height:2;color:#b9cce0;margin:0}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:18px 0}
+.stat,.panel{background:linear-gradient(145deg,#101f31,#0a1421);border:1px solid var(--line);border-radius:15px}
+.stat{padding:16px}
+.stat-label{font-size:12px;color:var(--muted);margin-bottom:12px}
+.stat-value{font-size:23px;font-weight:bold}
+.stat-note{font-size:11px;color:var(--muted);margin-top:9px}
+.panel{padding:17px;margin-bottom:16px}
+.panel-title{font-size:15px;font-weight:bold;margin:0 0 14px}
+label{font-size:12px;color:var(--muted);display:block;margin-bottom:7px}
+input,select{background:#07111e;border:1px solid #2a4059;border-radius:10px;padding:12px;color:var(--text);width:100%;min-width:0;font:inherit;font-size:13px;outline:none}
+input:focus,select:focus{border-color:var(--blue)}
+.connection{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:10px;align-items:end}
+button{border:0;border-radius:10px;padding:12px 17px;background:var(--blue);color:#04101d;font-weight:bold;font:inherit;font-size:13px;cursor:pointer;white-space:nowrap}
+button.secondary{background:#15283e;color:#dbeaff;border:1px solid #2b4560}
+button:disabled{opacity:.6;cursor:wait}
+.note{font-size:11px;color:var(--muted);line-height:1.9;margin-top:12px}
+.toolbar{display:grid;grid-template-columns:minmax(200px,2fr) minmax(130px,1fr) minmax(130px,1fr) auto;gap:10px;align-items:end;margin-bottom:14px}
+.table-head{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:14px}
+.table-head h2{font-size:16px;margin:0}
+.table-wrap{overflow:auto;border:1px solid var(--line);border-radius:12px}
+table{border-collapse:collapse;width:100%;min-width:900px;font-size:12px}
+th{background:#12233a;color:#b9cce0;font-weight:normal;white-space:nowrap}
+th,td{padding:14px 12px;text-align:right;border-bottom:1px solid #1a2b40}
+tbody tr:hover{background:#12243a80}
+tbody tr:last-child td{border-bottom:0}
+.symbol{font-weight:bold;color:#73c4ff}
+.company{color:var(--muted);font-size:11px;margin-top:5px}
+.up{color:var(--green)}.down{color:var(--red)}.neutral{color:var(--muted)}
+.empty{text-align:center;padding:35px 14px;color:var(--muted);line-height:2.2}
+.status{font-size:12px;line-height:1.9;margin-top:12px;color:var(--muted)}
+.status.error{color:var(--red)}.status.ok{color:var(--green)}
+footer{text-align:center;color:#71869e;font-size:11px;padding:22px 10px;border-top:1px solid var(--line);line-height:2}
+@media(max-width:800px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))}.toolbar{grid-template-columns:1fr 1fr}.connection{grid-template-columns:1fr 1fr}.connection .url-field{grid-column:1/-1}.hero h2{font-size:18px}}
+@media(max-width:440px){h1{font-size:21px}.wrap{padding:0 11px}.stats{gap:8px}.stat{padding:12px}.stat-value{font-size:19px}.panel{padding:12px}.connection{grid-template-columns:1fr}.connection .url-field{grid-column:auto}.toolbar{grid-template-columns:1fr}.pill{font-size:11px}}
+</style>
+</head>
+<body>
+<header>
+ <div class="wrap top">
+  <div class="brand">
+   <div class="logo">↗</div>
+   <div><h1>دیدبان پول</h1><div class="sub">DIDBAN POOL · پایش بازار سرمایه</div></div>
+  </div>
+  <div class="pill"><span class="dot" id="liveDot"></span><span id="connectionBadge">منبع داده متصل نیست</span></div>
+ </div>
+</header>
+
+<main class="wrap">
+ <section class="hero">
+  <h2>تصویر شفاف‌تر از بازار، در یک نگاه</h2>
+  <p>جست‌وجو و بررسی نمادها، قیمت آخرین معامله، قیمت پایانی، تغییرات، حجم و ارزش معاملات؛ اطلاعات بازار پس از اتصال به منبع داده معتبر نمایش داده می‌شوند.</p>
+ </section>
+
+ <section class="stats">
+  <div class="stat"><div class="stat-label">تعداد نمادهای دریافت‌شده</div><div class="stat-value" id="totalCount">—</div><div class="stat-note">بر اساس پاسخ منبع داده</div></div>
+  <div class="stat"><div class="stat-label">نمادهای مثبت</div><div class="stat-value up" id="positiveCount">—</div><div class="stat-note">تغییر قیمت بیشتر از صفر</div></div>
+  <div class="stat"><div class="stat-label">نمادهای منفی</div><div class="stat-value down" id="negativeCount">—</div><div class="stat-note">تغییر قیمت کمتر از صفر</div></div>
+  <div class="stat"><div class="stat-label">آخرین دریافت موفق</div><div class="stat-value" id="lastUpdated" style="font-size:16px">هنوز انجام نشده</div><div class="stat-note">زمان دستگاه شما</div></div>
+ </section>
+
+ <section class="panel">
+  <h2 class="panel-title">اتصال به منبع داده بازار</h2>
+  <div class="connection">
+   <div class="url-field"><label for="apiUrl">آدرس API یا Cloudflare Worker</label><input id="apiUrl" type="url" placeholder="https://your-worker.workers.dev"></div>
+   <button id="connectBtn" onclick="loadMarket()">اتصال و دریافت</button>
+   <button class="secondary" onclick="clearData()">پاک‌سازی داده‌ها</button>
+  </div>
+  <div class="note">آدرس Worker را پس از ساخت و آزمایش وارد کنید. Worker باید پاسخ JSON معتبر و شامل اطلاعات نمادها بدهد. اگر مرورگر با خطای CORS مواجه شود، باید تنظیمات دسترسی Worker اصلاح شود. این صفحه به‌تنهایی منبع قیمت زنده نیست.</div>
+  <div id="connectionStatus" class="status">وضعیت: منتظر وارد کردن آدرس منبع داده.</div>
+ </section>
+
+ <section class="panel">
+  <div class="table-head">
+   <h2>جدول نمادهای بازار</h2>
+   <button class="secondary" onclick="exportCSV()">خروجی CSV</button>
+  </div>
+  <div class="toolbar">
+   <div><label for="search">جست‌وجوی نماد یا نام شرکت</label><input id="search" placeholder="مثلاً فولاد" oninput="renderTable()"></div>
+   <div><label for="direction">وضعیت تغییر</label><select id="direction" onchange="renderTable()"><option value="all">همه نمادها</option><option value="up">مثبت</option><option value="down">منفی</option><option value="zero">بدون تغییر</option></select></div>
+   <div><label for="sortBy">مرتب‌سازی بر اساس</label><select id="sortBy" onchange="renderTable()"><option value="symbol">نام نماد</option><option value="change">درصد تغییر</option><option value="last">آخرین معامله</option><option value="volume">حجم معاملات</option><option value="value">ارزش معاملات</option></select></div>
+   <button class="secondary" onclick="renderTable()">اعمال فیلتر</button>
+  </div>
+  <div class="table-wrap">
+   <table>
+    <thead><tr><th>نماد / شرکت</th><th>آخرین معامله</th><th>قیمت پایانی</th><th>تغییر درصدی</th><th>حجم معاملات</th><th>ارزش معاملات</th><th>وضعیت</th></tr></thead>
+    <tbody id="stockRows"><tr><td colspan="7"><div class="empty">هنوز اطلاعاتی دریافت نشده است.<br>ابتدا آدرس API معتبر را وارد کنید و «اتصال و دریافت» را بزنید.</div></td></tr></tbody>
+   </table>
+  </div>
+  <div class="status" id="tableStatus">۰ نماد برای نمایش موجود است.</div>
+ </section>
+</main>
+
+<footer>دیدبان پول · داشبورد پایش بازار سرمایه<br>قیمت‌ها و شاخص‌ها فقط پس از دریافت موفق از منبع داده نمایش داده می‌شوند. این داشبورد توصیه خرید یا فروش نیست.</footer>
+
+<script>
+"use strict";
+let stocks = [];
+const $ = id => document.getElementById(id);
+
+function first(obj, keys, fallback = null) {
+  for (const key of keys) {
+    if (obj && obj[key] !== undefined && obj[key] !== null && obj[key] !== "") return obj[key];
+  }
+  return fallback;
+}
+function num(value) {
+  if (typeof value === "number") return Number.isFinite(value) ? value : 0;
+  if (value === null || value === undefined || value === "") return 0;
+  const normalized = String(value).replace(/[۰-۹]/g, d => "۰۱۲۳۴۵۶۷۸۹".indexOf(d))
+    .replace(/[٠-٩]/g, d => "٠١٢٣٤٥٦٧٨٩".indexOf(d)).replace(/[٬,،\s]/g, "");
+  const n = Number(normalized);
+  return Number.isFinite(n) ? n : 0;
+}
+function normalizeStock(s) {
+  return {
+    symbol: String(first(s, ["symbol","ticker","insCode","نماد","Symbol","TICKER"], "نامشخص")),
+    company: String(first(s, ["company","name","companyName","نام","نام شرکت","CompanyName"], "")),
+    last: num(first(s, ["last","lastPrice","lastTradePrice","pDrCotVal","آخرین معامله","قیمت آخرین معامله"], 0)),
+    close: num(first(s, ["close","closingPrice","pClosing","قیمت پایانی","قیمت پایانی بازار"], 0)),
+    change: num(first(s, ["changePercent","percentChange","change_pct","priceChangePercent","درصد تغییر","درصد تغییر قیمت"], 0)),
+    volume: num(first(s, ["volume","qTotTran5J","tradeVolume","حجم","حجم معاملات"], 0)),
+    value: num(first(s, ["value","qTotCap","tradeValue","ارزش","ارزش معاملات"], 0))
+  };
+}
+function extractRows(json) {
+  if (Array.isArray(json)) return json;
+  if (json && typeof json === "object") {
+    for (const key of ["data","stocks","items","symbols","results","rows","list"]) {
+      if (Array.isArray(json[key])) return json[key];
+    }
+  }
+  throw new Error("ساختار پاسخ JSON شناخته نشد. پاسخ باید آرایه نمادها یا شامل یکی از کلیدهای data، stocks، items، symbols، results، rows یا list باشد.");
+}
+function fmt(v, digits = 0) {
+  return Number(v).toLocaleString("fa-IR", {maximumFractionDigits:digits, minimumFractionDigits:digits});
+}
+function setStatus(message, type = "") {
+  $("connectionStatus").textContent = "وضعیت: " + message;
+  $("connectionStatus").className = "status " + type;
+}
+async function loadMarket() {
+  const url = $("apiUrl").value.trim();
+  if (!url) {
+    setStatus("ابتدا آدرس API یا Worker را وارد کنید.", "error");
+    $("apiUrl").focus();
+    return;
+  }
+  if (!/^https?:\/\//i.test(url)) {
+    setStatus("آدرس باید با https:// یا http:// شروع شود.", "error");
+    return;
+  }
+  const btn = $("connectBtn");
+  btn.disabled = true;
+  btn.textContent = "در حال دریافت…";
+  setStatus("در حال اتصال به منبع داده…");
+  try {
+    const response = await fetch(url, {headers:{"Accept":"application/json"}});
+    if (!response.ok) throw new Error("خطای HTTP " + response.status);
+    const json = await response.json();
+    const rows = extractRows(json);
+    stocks = rows.map(normalizeStock).filter(s => s.symbol !== "نامشخص");
+    if (!stocks.length) throw new Error("پاسخ دریافت شد، اما نماد قابل استفاده‌ای در آن وجود ندارد.");
+    $("connectionBadge").textContent = "دریافت اطلاعات موفق";
+    $("liveDot").style.background = "var(--green)";
+    $("lastUpdated").textContent = new Date().toLocaleTimeString("fa-IR",{hour:"2-digit",minute:"2-digit",second:"2-digit"});
+    $("totalCount").textContent = fmt(stocks.length);
+    $("positiveCount").textContent = fmt(stocks.filter(s=>s.change>0).length);
+    $("negativeCount").textContent = fmt(stocks.filter(s=>s.change<0).length);
+    setStatus("اطلاعات از آدرس واردشده دریافت شد. صحت، تازگی و کامل بودن داده‌ها به منبع API بستگی دارد.", "ok");
+    renderTable();
+  } catch (error) {
+    $("connectionBadge").textContent = "اتصال ناموفق";
+    $("liveDot").style.background = "var(--red)";
+    setStatus("دریافت ناموفق: " + error.message + " — آدرس، ساختار JSON و تنظیمات CORS را بررسی کنید.", "error");
+  } finally {
+    btn.disabled = false;
+    btn.textContent = "اتصال و دریافت";
+  }
+}
+function renderTable() {
+  const q = $("search").value.trim().toLocaleLowerCase("fa");
+  const dir = $("direction").value;
+  const sort = $("sortBy").value;
+  let rows = stocks.filter(s => {
+    const matches = (s.symbol + " " + s.company).toLocaleLowerCase("fa").includes(q);
+    const direction = dir==="up" ? s.change>0 : dir==="down" ? s.change<0 : dir==="zero" ? s.change===0 : true;
+    return matches && direction;
+  });
+  rows.sort((a,b) => {
+    if(sort==="change") return b.change-a.change;
+    if(sort==="last") return b.last-a.last;
+    if(sort==="volume") return b.volume-a.volume;
+    if(sort==="value") return b.value-a.value;
+    return a.symbol.localeCompare(b.symbol,"fa");
+  });
+  const body = $("stockRows");
+  if (!rows.length) {
+    body.innerHTML = '<tr><td colspan="7"><div class="empty">' +
+      (stocks.length ? "نمادی با این شرایط پیدا نشد." : "هنوز اطلاعاتی دریافت نشده است. ابتدا منبع داده را متصل کنید.") +
+      "</div></td></tr>";
+  } else {
+    body.innerHTML = rows.map(s => {
+      const cls = s.change>0 ? "up" : s.change<0 ? "down" : "neutral";
+      const label = s.change>0 ? "مثبت" : s.change<0 ? "منفی" : "بدون تغییر";
+      return `<tr>
+        <td><div class="symbol">${escapeHTML(s.symbol)}</div><div class="company">${escapeHTML(s.company)}</div></td>
+        <td>${fmt(s.last)}</td><td>${fmt(s.close)}</td>
+        <td class="${cls}">${s.change>0?"+":""}${fmt(s.change,2)}٪</td>
+        <td>${fmt(s.volume)}</td><td>${fmt(s.value)}</td>
+        <td class="${cls}">${label}</td>
+      </tr>`;
+    }).join("");
+  }
+  $("tableStatus").textContent = fmt(rows.length) + " نماد از " + fmt(stocks.length) + " نماد دریافت‌شده نمایش داده می‌شود.";
+}
+function escapeHTML(value) {
+  return String(value).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+}
+function exportCSV() {
+  if (!stocks.length) {
+    setStatus("برای خروجی گرفتن، ابتدا اطلاعات را از API دریافت کنید.", "error");
+    return;
+  }
+  const header = ["نماد","نام شرکت","آخرین معامله","قیمت پایانی","درصد تغییر","حجم","ارزش"];
+  const lines = [header, ...stocks.map(s=>[s.symbol,s.company,s.last,s.close,s.change,s.volume,s.value])];
+  const csv = "\uFEFF" + lines.map(row=>row.map(v=>'"'+String(v).replace(/"/g,'""')+'"').join(",")).join("\r\n");
+  const blob = new Blob([csv],{type:"text/csv;charset=utf-8;"});
+  const link = document.createElement("a");
+  link.href = URL.createObjectURL(blob);
+  link.download = "didban-pool-stocks.csv";
+  link.click();
+  URL.revokeObjectURL(link.href);
+}
+function clearData() {
+  stocks = [];
+  $("totalCount").textContent = "—";
+  $("positiveCount").textContent = "—";
+  $("negativeCount").textContent = "—";
+  $("lastUpdated").textContent = "هنوز انجام نشده";
+  $("connectionBadge").textContent = "منبع داده متصل نیست";
+  $("liveDot").style.background = "var(--gold)";
+  renderTable();
+  setStatus("داده‌های نمایش‌داده‌شده پاک شدند.");
+}
+</script>
+</body>
+</html>
